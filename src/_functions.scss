@@ -95,28 +95,3 @@
 
     @return $result;
 }
-
-// background-repeat generator
-// Take list of skeleton items and call generator by type
-//
-// @param: List $particles
-// @return: List of background-repeat value
-@function skeleton-repeat($particles...) {
-    $result: null;
-    @if length($particles) == 0 {
-        @return $result;
-    }
-
-    $result: ();
-    @each $particle in $particles {
-        @if map-get($particle, 'type') == 'rect' {
-            $result: append($result, skeleton-repeat-rect($particle), comma);
-        }
-
-        @if map-get($particle, 'type') == 'ellipse' {
-            $result: append($result, skeleton-repeat-ellipse($particle), comma);
-        }
-    }
-
-    @return $result;
-}
