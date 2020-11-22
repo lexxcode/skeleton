@@ -2,10 +2,6 @@
   "name": "@lexxcode/skeleton",
   "version": "0.0.3",
   "description": "Skeleton Screen View",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lexxcode/skeleton.git"
