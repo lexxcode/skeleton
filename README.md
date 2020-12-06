@@ -1,7 +1,5 @@
 # Skeleton
-<p align="center">
-    <img src="./doc/img/skeleton.png" width="640" height="320" alt="Skeleton logo">
-</p>
+<img src="./doc/img/skeleton.png" width="100%" alt="Skeleton logo">
 
 Skeleton is a simple way to create content placeholder screen view.
 
@@ -14,26 +12,32 @@ To create your own skeleton you can apply a basic mixin `skeleton`. Feel free to
 ```scss
 .block {
     --color: #c3c3c3;
+    --r: 5px;
 
-    width: 300px;
+    width: 640px;
 
     &:empty {
         &::before {
             content: '';
-            height: 400px;
+            height: 480px;
             display: block;
 
             @include skeleton(
-                skeleton-ellipse($color: var(--color), $width: 40px, $height: 40px, $x: left, $y: top),
-                skeleton-rect($color: var(--color), $width: calc(100% - 50px), $height: 10px, $x: 50px, $y: 0, $radius: 5px),
-                skeleton-rect($color: var(--color), $width: calc(100% - 50px), $height: 10px, $x: 50px, $y: 15px, $radius: 5px),
-                skeleton-rect($color: var(--color), $width: calc(100% - 50px), $height: 10px, $x: 50px, $y: 30px, $radius: 5px)
+                skeleton-ellipse($color: var(--color), $width: 140px, $height: 140px, $x: left, $y: top),
+                skeleton-rect($color: var(--color), $width: calc(100% - 150px), $height: 40px, $x: 150px, $y: 0, $radius: var(--r)),
+                skeleton-rect($color: var(--color), $width: calc(100% - 150px), $height: 40px, $x: 150px, $y: 50px, $radius: var(--r)),
+                skeleton-rect($color: var(--color), $width: calc(100% - 150px), $height: 40px, $x: 150px, $y: 100px, $radius: var(--r)),
+                skeleton-rect($color: var(--color), $width: 100%, $height: 100px, $x: 0, $y: 150px, $radius: var(--r)),
+                skeleton-rect($color: var(--color), $width: calc(33% - 10px * 2 / 3), $height: 100px, $x: left, $y: 260px, $radius: var(--r)),
+                skeleton-rect($color: var(--color), $width: calc(33% - 10px * 2 / 3), $height: 100px, $x: center, $y: 260px, $radius: var(--r)),
+                skeleton-rect($color: var(--color), $width: calc(33% - 10px * 2 / 3), $height: 100px, $x: right, $y: 260px, $radius: var(--r)),
+                skeleton-rect($color: var(--color), $width: 100%, $height: 110px, $x: 0, $y: 370px, $radius: var(--r)),
             );
         }
     }
 }
 ```
-<img src="./doc/img/base_mixin.png" width="322">
+<img src="./doc/img/base_mixin.png" width="640" height="480">
 
 ### skeleton-ellipse
 The function is designed to create circles and ellipses.
