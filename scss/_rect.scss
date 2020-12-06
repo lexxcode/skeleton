@@ -1,37 +1,3 @@
-// @private: background-list generator
-// Take a particle map and generate background-list value
-//
-// @param: Map $particle
-// @return: List of background-list value
-@function skeleton-list-rect($particle) {
-    $color: map-get($particle, 'color');
-    $width: map-get($particle, 'width');
-    $height: map-get($particle, 'height');
-    $x: map-get($particle, 'x');
-    $y: map-get($particle, 'y');
-    $radius: map-get($particle, 'radius');
-    $result: ();
-
-    @if not $radius or $radius == 0 {
-        $result: (
-            linear-gradient($color, $color) #{$x} #{$y} / #{$width} #{$height},
-        );
-    }
-
-    @else {
-        $result: (
-            radial-gradient(circle closest-side at calc(#{$radius}) calc(#{$radius}), $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
-            radial-gradient(circle closest-side at calc(100% - #{$radius}) calc(#{$radius}), $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
-            radial-gradient(circle closest-side at calc(#{$radius}) calc(100% - #{$radius}), $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
-            radial-gradient(circle closest-side at calc(100% - #{$radius}) calc(100% - #{$radius}), $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
-            linear-gradient(90deg, transparent #{$radius}, $color #{$radius}, $color calc(100% - #{$radius}), transparent calc(100% - #{$radius})) #{$x} #{$y} / #{$width} #{$height},
-            linear-gradient(0deg, transparent #{$radius}, $color #{$radius}, $color calc(100% - #{$radius}), transparent calc(100% - #{$radius})) #{$x} #{$y} / #{$width} #{$height},
-        );
-    }
-
-    @return $result;
-}
-
 // @public: function for get $particle object for draw rect
 //
 // @param: $color
@@ -41,22 +7,34 @@
 // @param: $y: 0
 // @param: $radius: null
 //
-// @return: Formated map of parameters
+// @return: Formated map of backgrounds
 @function skeleton-rect(
     $color,
     $width,
     $height,
     $x: 0,
     $y: 0,
-    $radius: null
+    $radius: null,
+    $clip: border-box
 ) {
-    @return (
-        'type': 'rect',
-        'color': $color,
-        'width': $width,
-        'height': $height,
-        'x': $x,
-        'y': $y,
-        'radius': $radius
-    );
+    $result: ();
+
+    @if not $radius or $radius == 0 {
+        $result: (
+            $clip linear-gradient($color, $color) #{$x} #{$y} / #{$width} #{$height},
+        );
+    }
+
+    @else {
+        $result: (
+            $clip radial-gradient(circle closest-side at #{$radius} #{$radius}, $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
+            $clip radial-gradient(circle closest-side at calc(100% - #{$radius}) #{$radius}, $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
+            $clip radial-gradient(circle closest-side at #{$radius} calc(100% - #{$radius}), $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
+            $clip radial-gradient(circle closest-side at calc(100% - #{$radius}) calc(100% - #{$radius}), $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
+            $clip linear-gradient(90deg, transparent #{$radius}, $color #{$radius}, $color calc(100% - #{$radius}), transparent calc(100% - #{$radius})) #{$x} #{$y} / #{$width} #{$height},
+            $clip linear-gradient(0deg, transparent #{$radius}, $color #{$radius}, $color calc(100% - #{$radius}), transparent calc(100% - #{$radius})) #{$x} #{$y} / #{$width} #{$height}
+        );
+    }
+
+    @return $result;
 }
