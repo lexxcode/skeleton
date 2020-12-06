@@ -1,87 +1,31 @@
-// @private: background-image generator
-// Take a particle map and generate background-image value
+// @private: background-list generator
+// Take a particle map and generate background-list value
 //
 // @param: Map $particle
-// @return: List of background-image value
-@function skeleton-image-rect($particle) {
+// @return: List of background-list value
+@function skeleton-list-rect($particle) {
     $color: map-get($particle, 'color');
-    $width: map-get($particle, 'width');
-    $height: map-get($particle, 'height');
-    $radius: min(map-get($particle, 'radius'), floor($width / 2), floor($height / 2));
-    $result: ();
-
-    @if not $radius or strip-units($radius) == 0 {
-        $result: (
-            linear-gradient($color, $color),
-        );
-    } @else {
-        $result: (
-            radial-gradient(closest-side, $color 100%, transparent 100%),
-            radial-gradient(closest-side, $color 100%, transparent 100%),
-            radial-gradient(closest-side, $color 100%, transparent 100%),
-            radial-gradient(closest-side, $color 100%, transparent 100%),
-            linear-gradient($color, $color),
-            linear-gradient($color, $color),
-        );
-    }
-
-    @return $result;
-}
-
-// @private: background-size generator
-// Take a particle map and generate background-size value
-//
-// @param: Map $particle
-// @return: List of background-size value
-@function skeleton-size-rect($particle) {
-    $width: map-get($particle, 'width');
-    $height: map-get($particle, 'height');
-    $radius: min(map-get($particle, 'radius'), floor($width / 2), floor($height / 2));
-    $result: ();
-
-    @if not $radius or strip-units($radius) == 0 {
-        $result: (
-            $width $height,
-        );
-    } @else {
-        $result: (
-            #{$radius * 2} #{$radius * 2},
-            #{$radius * 2} #{$radius * 2},
-            #{$radius * 2} #{$radius * 2},
-            #{$radius * 2} #{$radius * 2},
-            $width #{$height - $radius * 2},
-            #{$width - $radius * 2} $height
-        );
-    }
-
-    @return $result;
-}
-
-// @private: background-position generator
-// Take a particle map and generate background-position value
-//
-// @param: Map $particle
-// @return: List of background-position value
-@function skeleton-position-rect($particle) {
     $width: map-get($particle, 'width');
     $height: map-get($particle, 'height');
     $x: map-get($particle, 'x');
     $y: map-get($particle, 'y');
-    $radius: min(map-get($particle, 'radius'), floor($width / 2), floor($height / 2));
+    $radius: map-get($particle, 'radius');
     $result: ();
 
-    @if not $radius or strip-units($radius) == 0 {
+    @if not $radius or $radius == 0 {
         $result: (
-            $x $y,
+            linear-gradient($color, $color) #{$x} #{$y} / #{$width} #{$height},
         );
-    } @else {
+    }
+
+    @else {
         $result: (
-            $x $y,
-            #{$x + $width - $radius * 2} $y,
-            $x #{$y + $height - $radius * 2},
-            #{$x + $width - $radius * 2} #{$y + $height - $radius * 2},
-            $x #{$y + $radius},
-            #{$x + $radius} $y
+            radial-gradient(circle closest-side at calc(#{$radius}) calc(#{$radius}), $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
+            radial-gradient(circle closest-side at calc(100% - #{$radius}) calc(#{$radius}), $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
+            radial-gradient(circle closest-side at calc(#{$radius}) calc(100% - #{$radius}), $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
+            radial-gradient(circle closest-side at calc(100% - #{$radius}) calc(100% - #{$radius}), $color #{$radius}, transparent 0) #{$x} #{$y} / #{$width} #{$height},
+            linear-gradient(90deg, transparent #{$radius}, $color #{$radius}, $color calc(100% - #{$radius}), transparent calc(100% - #{$radius})) #{$x} #{$y} / #{$width} #{$height},
+            linear-gradient(0deg, transparent #{$radius}, $color #{$radius}, $color calc(100% - #{$radius}), transparent calc(100% - #{$radius})) #{$x} #{$y} / #{$width} #{$height},
         );
     }
 
@@ -96,7 +40,7 @@
 // @param: $x: 0
 // @param: $y: 0
 // @param: $radius: null
-// 
+//
 // @return: Formated map of parameters
 @function skeleton-rect(
     $color,

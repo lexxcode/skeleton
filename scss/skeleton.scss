@@ -15,8 +15,6 @@
 @mixin skeleton($particles...) {
     $list-normalized: skeleton-normalize($particles...);
 
-    background-image: skeleton-image($list-normalized...);
-    background-size: skeleton-size($list-normalized...);
-    background-position: skeleton-position($list-normalized...);
+    background: skeleton-list($list-normalized...);
     background-repeat: no-repeat;
 }
