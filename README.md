@@ -54,9 +54,9 @@ The function is designed to create circles and ellipses.
 The function is designed to create rectangle shape with the ability to set rounding of corners.
 
 #### Options:
-- **`$color`** - `<Color>` Color of ellipse
-- **`$width`** - `<Length | Percentage | calc()>` Width of ellipse
-- **`$height`** - `<Length | Percentage | calc()>` Height of ellipse
+- **`$color`** - `<Color>` Color of rect
+- **`$width`** - `<Length | Percentage | calc()>` Width of rect
+- **`$height`** - `<Length | Percentage | calc()>` Height of rect
 - **`$x`** - `<Length | Percentage | calc() | left | center | right>` Horizontal position of shape, same as `background-position-x`. Default value is `0`
 - **`$y`** - `<Length | Percentage | calc() | top | center | bottom>` Vertical position of shape, same as `background-position-y`. Default value is `0`
 - **`$radius`** - `<Length | null>` - The property rounds the corners
