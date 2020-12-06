@@ -37,7 +37,7 @@ To create your own skeleton you can apply a basic mixin `skeleton`. Feel free to
     }
 }
 ```
-<img src="./doc/img/base_mixin.png" width="640" height="480">
+<img src="./doc/img/base_mixin.png" width="640">
 
 ### skeleton-ellipse
 The function is designed to create circles and ellipses.
